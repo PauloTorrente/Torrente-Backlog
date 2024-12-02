@@ -11,7 +11,8 @@ const { checkAdmRole } = require('../../middlewares/role.middleware');
 
 const userRouter = require('./users/users.router');
 const backlogRouter = require('./backlog/backlog.router');
-const wishlistRouter = require('./wishlist/wishlist.router');  
+const wishlistRouter = require('./wishlist/wishlist.router');
+const acquiredRouter = require('./acquired/acquired.router');  
 
 const router = express.Router();
 
@@ -22,10 +23,13 @@ router.get('/users/:id', authenticate, checkAdmRole, getUserByIdController);
 router.put('/users/:id', authenticate, checkAdmRole, updateUserController);
 router.delete('/users/:id', authenticate, checkAdmRole, deleteUserController);
 
-// Backlog routes 
+// Backlog routes
 router.use('/backlog', authenticate, checkAdmRole, backlogRouter);
 
-// Wishlist routes (Add Wishlist routes here)
-router.use('/wishlist', authenticate, checkAdmRole, wishlistRouter); 
+// Wishlist routes
+router.use('/wishlist', authenticate, checkAdmRole, wishlistRouter);
+
+// Acquired routes
+router.use('/acquired', authenticate, checkAdmRole, acquiredRouter);  
 
 module.exports = router;

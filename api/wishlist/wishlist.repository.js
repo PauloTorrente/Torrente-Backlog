@@ -29,4 +29,18 @@ const deleteWishlist = async (id) => {
     return { message: 'Wishlist item deleted successfully' };
 };
 
-module.exports = { createWishlist, getAllWishlist, getWishlistById, updateWishlist, deleteWishlist };
+const moveToBacklog = async (id) => {
+    const result = await sql`INSERT INTO backlog (SELECT id, name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url FROM wishlist WHERE id = ${id})
+                             RETURNING id, name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url`;
+    await sql`DELETE FROM wishlist WHERE id = ${id}`;
+    return result[0];
+};
+
+const moveToAcquired = async (id) => {
+    const result = await sql`INSERT INTO acquired (SELECT id, name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url FROM wishlist WHERE id = ${id})
+                             RETURNING id, name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url`;
+    await sql`DELETE FROM wishlist WHERE id = ${id}`;
+    return result[0];
+};
+
+module.exports = { createWishlist, getAllWishlist, getWishlistById, updateWishlist, deleteWishlist, moveToBacklog, moveToAcquired };

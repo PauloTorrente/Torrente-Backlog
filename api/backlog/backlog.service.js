@@ -24,11 +24,16 @@ const moveToWishlistService = async (id) => {
     return await backlogRepository.moveToWishlist(id);
 };
 
+const moveToAcquiredService = async (id) => {
+    return await backlogRepository.moveToAcquired(id);
+};
+
 module.exports = {
     createBacklogService,
     getAllBacklogsService,
     getBacklogByIdService,
     updateBacklogService,
     deleteBacklogService,
-    moveToWishlistService, 
+    moveToWishlistService,
+    moveToAcquiredService
 };

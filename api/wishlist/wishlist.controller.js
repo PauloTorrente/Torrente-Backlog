@@ -4,14 +4,15 @@ const {
     getWishlistByIdService, 
     updateWishlistService, 
     deleteWishlistService,
-    moveToBacklogService
+    moveToBacklogService,
+    moveToAcquiredService  
 } = require('./wishlist.service');
 
 const createWishlistController = async (req, res) => {
-    const { name,  generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
+    const { name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
     try {
         const wishlistItem = await createWishlistService({
-            name,  generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
+            name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
         });
         res.status(201).json(wishlistItem);
     } catch (error) {
@@ -43,10 +44,10 @@ const getWishlistByIdController = async (req, res) => {
 
 const updateWishlistController = async (req, res) => {
     const { id } = req.params;
-    const { name,  generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
+    const { name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
     try {
         const wishlistItem = await updateWishlistService(id, {
-            name,  generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
+            name, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
         });
         res.status(200).json(wishlistItem);
     } catch (error) {
@@ -64,11 +65,22 @@ const deleteWishlistController = async (req, res) => {
     }
 };
 
-// New controller method to move item to backlog
+
 const moveToBacklogController = async (req, res) => {
     const { id } = req.params;
     try {
         const result = await moveToBacklogService(id); 
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
+const moveToAcquiredController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await moveToAcquiredService(id);
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -81,5 +93,6 @@ module.exports = {
     getWishlistByIdController,
     updateWishlistController,
     deleteWishlistController,
-    moveToBacklogController, 
+    moveToBacklogController,
+    moveToAcquiredController 
 };
