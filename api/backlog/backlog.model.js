@@ -5,6 +5,7 @@ const {
     getBacklogByIdController,
     updateBacklogController,
     deleteBacklogController,
+    moveToWishlistController,
 } = require('./backlog.controller');
 const { authenticate } = require('../../middlewares/auth.middleware');
 const { checkAdmRole } = require('../../middlewares/role.middleware');
@@ -17,5 +18,6 @@ router.get('/', authenticate, checkAdmRole, getAllBacklogsController);
 router.get('/:id', authenticate, checkAdmRole, getBacklogByIdController);
 router.put('/:id', authenticate, checkAdmRole, updateBacklogController);
 router.delete('/:id', authenticate, checkAdmRole, deleteBacklogController);
+router.post('/:id/move-to-wishlist', authenticate, checkAdmRole, moveToWishlistController);
 
 module.exports = router;

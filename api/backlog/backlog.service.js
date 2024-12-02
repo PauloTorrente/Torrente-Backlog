@@ -20,10 +20,15 @@ const deleteBacklogService = async (id) => {
     return await backlogRepository.deleteBacklog(id);
 };
 
+const moveToWishlistService = async (id) => {
+    return await backlogRepository.moveToWishlist(id);
+};
+
 module.exports = {
     createBacklogService,
     getAllBacklogsService,
     getBacklogByIdService,
     updateBacklogService,
     deleteBacklogService,
+    moveToWishlistService, 
 };

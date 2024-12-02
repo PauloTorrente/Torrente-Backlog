@@ -3,14 +3,15 @@ const {
     getAllBacklogsService, 
     getBacklogByIdService, 
     updateBacklogService, 
-    deleteBacklogService 
+    deleteBacklogService, 
+    moveToWishlistService 
 } = require('./backlog.service');
 
 const createBacklogController = async (req, res) => {
-    const { name, release_date, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
+    const { name, genres, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
     try {
         const backlog = await createBacklogService({
-            name, release_date, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
+            name, genres, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
         });
         res.status(201).json(backlog);
     } catch (error) {
@@ -42,10 +43,10 @@ const getBacklogByIdController = async (req, res) => {
 
 const updateBacklogController = async (req, res) => {
     const { id } = req.params;
-    const { name, release_date, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
+    const { name, genres, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = req.body;
     try {
         const backlog = await updateBacklogService(id, {
-            name, release_date, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
+            name, genres, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url
         });
         res.status(200).json(backlog);
     } catch (error) {
@@ -63,10 +64,21 @@ const deleteBacklogController = async (req, res) => {
     }
 };
 
+const moveToWishlistController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await moveToWishlistService(id);
+        res.status(200).json({ message: result });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createBacklogController,
     getAllBacklogsController,
     getBacklogByIdController,
     updateBacklogController,
     deleteBacklogController,
+    moveToWishlistController,
 };
