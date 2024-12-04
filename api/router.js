@@ -12,7 +12,9 @@ const { checkAdmRole } = require('../../middlewares/role.middleware');
 const userRouter = require('./users/users.router');
 const backlogRouter = require('./backlog/backlog.router');
 const wishlistRouter = require('./wishlist/wishlist.router');
-const acquiredRouter = require('./acquired/acquired.router');  
+const acquiredRouter = require('./acquired/acquired.router');
+const favoriteRouter = require('./favorite/favorite.router');
+const droppedRouter = require('./dropped/dropped.router');  
 
 const router = express.Router();
 
@@ -30,6 +32,12 @@ router.use('/backlog', authenticate, checkAdmRole, backlogRouter);
 router.use('/wishlist', authenticate, checkAdmRole, wishlistRouter);
 
 // Acquired routes
-router.use('/acquired', authenticate, checkAdmRole, acquiredRouter);  
+router.use('/acquired', authenticate, checkAdmRole, acquiredRouter);
+
+// Favorite routes
+router.use('/favorite', authenticate, checkAdmRole, favoriteRouter);
+
+// Dropped routes (previously Beaten routes)
+router.use('/dropped', authenticate, checkAdmRole, droppedRouter); 
 
 module.exports = router;

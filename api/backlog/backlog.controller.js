@@ -5,7 +5,8 @@ const {
     updateBacklogService, 
     deleteBacklogService, 
     moveToWishlistService,
-    moveToAcquiredService 
+    moveToAcquiredService,
+    moveToBeatenService
 } = require('./backlog.service');
 
 const createBacklogController = async (req, res) => {
@@ -85,6 +86,16 @@ const moveToAcquiredController = async (req, res) => {
     }
 };
 
+const moveToBeatenController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await moveToBeatenService(id); 
+        res.status(200).json({ message: result });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createBacklogController,
     getAllBacklogsController,
@@ -92,5 +103,6 @@ module.exports = {
     updateBacklogController,
     deleteBacklogController,
     moveToWishlistController,
-    moveToAcquiredController
+    moveToAcquiredController,
+    moveToBeatenController 
 };

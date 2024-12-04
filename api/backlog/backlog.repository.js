@@ -42,4 +42,11 @@ const moveToAcquired = async (id) => {
     return result[0];
 };
 
-module.exports = { createBacklog, getAllBacklogs, getBacklogById, updateBacklog, deleteBacklog, moveToWishlist, moveToAcquired };
+const moveToBeaten = async (id) => {
+    const result = await sql`INSERT INTO beaten (SELECT * FROM backlog WHERE id = ${id})
+                             RETURNING *`;
+    await sql`DELETE FROM backlog WHERE id = ${id}`;
+    return result[0];
+};
+
+module.exports = { createBacklog, getAllBacklogs, getBacklogById, updateBacklog, deleteBacklog, moveToWishlist, moveToAcquired, moveToBeaten };
