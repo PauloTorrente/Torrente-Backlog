@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const authRouter = require('./api/auth/auth.router');
 const usersRouter = require('./api/users/users.router');
+const beatenRouter = require('./api/beaten/beaten.router');
 const backlogRouter = require('./api/backlog/backlog.router');
 const wishlistRouter = require('./api/wishlist/wishlist.router');
 const acquiredRouter = require('./api/acquired/acquired.router');
@@ -17,6 +18,7 @@ app.use(cors({ origin: '*' }));
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/backlog', backlogRouter);
+app.use('/api/beaten', beatenRouter)
 app.use('/api/wishlist', wishlistRouter);
 app.use('/api/acquired', acquiredRouter);
 app.use('/api/favorite', favoriteRouter);

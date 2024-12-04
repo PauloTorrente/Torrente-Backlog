@@ -14,6 +14,7 @@ const backlogRouter = require('./backlog/backlog.router');
 const wishlistRouter = require('./wishlist/wishlist.router');
 const acquiredRouter = require('./acquired/acquired.router');
 const favoriteRouter = require('./favorite/favorite.router');
+const beatenRouter = require('./beaten/beaten.router');
 const droppedRouter = require('./dropped/dropped.router');  
 
 const router = express.Router();
@@ -37,7 +38,10 @@ router.use('/acquired', authenticate, checkAdmRole, acquiredRouter);
 // Favorite routes
 router.use('/favorite', authenticate, checkAdmRole, favoriteRouter);
 
-// Dropped routes (previously Beaten routes)
+// Dropped routes 
 router.use('/dropped', authenticate, checkAdmRole, droppedRouter); 
+
+// Beaten routes 
+router.use('/beaten', authenticate, checkAdmRole, droppedRouter); 
 
 module.exports = router;
