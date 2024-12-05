@@ -3,20 +3,24 @@ const {
     getAllFavoritesService,
     getFavoriteByIdService,
     deleteFavoriteService,
+    copyFromBeatenService,
 } = require('./favorite.service');
 
 const addToFavoriteController = async (req, res) => {
+    try {
+        const favoriteData = req.body;  
+        const favorite = await addToFavoriteService(favoriteData);  
+        res.status(200).json(favorite);  
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+const copyFromBeatenController = async (req, res) => {
     const { gameId } = req.params;
     try {
-        // Get the beaten game first
-        const beatenGame = await getBeatenByIdService(gameId);
-        if (!beatenGame) {
-            return res.status(404).json({ error: 'Beaten game not found' });
-        }
-
-        // Copy the beaten game to the favorite status (without removing from beaten)
-        const favorite = await addToFavoriteService(beatenGame);
-        res.status(200).json(favorite);
+        const favorite = await copyFromBeatenService(gameId);  
+        res.status(200).json(favorite);  
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -56,6 +60,7 @@ const deleteFavoriteController = async (req, res) => {
 
 module.exports = {
     addToFavoriteController,
+    copyFromBeatenController,
     getAllFavoritesController,
     getFavoriteByIdController,
     deleteFavoriteController,

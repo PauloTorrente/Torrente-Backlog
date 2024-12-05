@@ -7,7 +7,7 @@ const createFavoriteService = async (favorite) => {
 
 // Service to get all favorite games
 const getAllFavoriteService = async () => {
-    return await favoriteRepository.getAllFavorite();
+    return await favoriteRepository.getAllFavorites();
 };
 
 // Service to get a specific favorite game by ID
@@ -30,6 +30,11 @@ const copyFromBeatenService = async (id) => {
     return await favoriteRepository.copyFromBeaten(id);
 };
 
+// Service to add a new game directly to favorites (new functionality)
+const addToFavoriteService = async (favoriteData) => {
+    return await favoriteRepository.createFavorite(favoriteData);
+};
+
 module.exports = {
     createFavoriteService,
     getAllFavoriteService,
@@ -37,4 +42,5 @@ module.exports = {
     updateFavoriteService,
     deleteFavoriteService,
     copyFromBeatenService,
+    addToFavoriteService,  
 };
