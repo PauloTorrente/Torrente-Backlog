@@ -35,6 +35,15 @@ const addToFavoriteService = async (favoriteData) => {
     return await favoriteRepository.createFavorite(favoriteData);
 };
 
+const getAllFavoritesService = async () => {
+    try {
+        // Lógica para pegar todos os favoritos no banco de dados
+        return await FavoriteModel.find({});
+    } catch (error) {
+        throw new Error('Erro ao buscar favoritos');
+    }
+};
+
 module.exports = {
     createFavoriteService,
     getAllFavoriteService,

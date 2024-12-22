@@ -3,7 +3,7 @@ const sql = require('../../config/database');
 const createDropped = async (dropped) => {
     const { name, genres, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = dropped;
     return await sql`INSERT INTO dropped (name, genres, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url)
-                     VALUES (${name}, ${genres}, ${generation}, ${console}, ${decade}, ${director}, ${composer}, ${character_design}, ${series}, ${developer}, ${distributor}, ${image_url})
+                     VALUES (${name}, ${sql.array(genres)}, ${generation}, ${console}, ${decade}, ${director}, ${composer}, ${character_design}, ${series}, ${developer}, ${distributor}, ${image_url})
                      RETURNING *`;
 };
 
@@ -19,7 +19,7 @@ const getDroppedById = async (id) => {
 const updateDropped = async (id, dropped) => {
     const { name, genres, generation, console, decade, director, composer, character_design, series, developer, distributor, image_url } = dropped;
     return await sql`UPDATE dropped
-                     SET name = ${name}, genres = ${genres}, generation = ${generation}, console = ${console}, decade = ${decade}, director = ${director}, composer = ${composer}, character_design = ${character_design}, series = ${series}, developer = ${developer}, distributor = ${distributor}, image_url = ${image_url}
+                     SET name = ${name}, genres = ${sql.array(genres)}, generation = ${generation}, console = ${console}, decade = ${decade}, director = ${director}, composer = ${composer}, character_design = ${character_design}, series = ${series}, developer = ${developer}, distributor = ${distributor}, image_url = ${image_url}
                      WHERE id = ${id}
                      RETURNING *`;
 };

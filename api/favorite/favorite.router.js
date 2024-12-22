@@ -15,10 +15,10 @@ router.post('/', authenticate, addToFavoriteController);
 
 router.post('/:id/copy-from-beaten', authenticate, checkAdmRole, copyFromBeatenController);
 
-router.get('/', authenticate, getAllFavoritesController); 
+router.get('/', authenticate, getAllFavoritesController);
 
-router.get('/:id', authenticate, getFavoriteByIdController); 
+router.get('/:id', authenticate, getFavoriteByIdController);
 
-router.delete('/:id', authenticate, deleteFavoriteController); 
+router.delete('/:id', authenticate, deleteFavoriteController);
 
 module.exports = router;

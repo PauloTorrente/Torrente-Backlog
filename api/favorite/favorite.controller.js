@@ -8,19 +8,19 @@ const {
 
 const addToFavoriteController = async (req, res) => {
     try {
-        const favoriteData = req.body;  
-        const favorite = await addToFavoriteService(favoriteData);  
-        res.status(200).json(favorite);  
+        const favoriteData = req.body;
+        const favorite = await addToFavoriteService(favoriteData);
+        res.status(200).json(favorite);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
 
 const copyFromBeatenController = async (req, res) => {
-    const { gameId } = req.params;
+    const { id: gameId } = req.params;
     try {
-        const favorite = await copyFromBeatenService(gameId);  
-        res.status(200).json(favorite);  
+        const favorite = await copyFromBeatenService(gameId);
+        res.status(200).json(favorite);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
