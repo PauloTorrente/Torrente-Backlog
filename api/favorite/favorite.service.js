@@ -1,4 +1,4 @@
-const favoriteRepository = require('./favorite.repository'); 
+const favoriteRepository = require('./favorite.repository');
 
 // Service to create a new favorite game
 const createFavoriteService = async (favorite) => {
@@ -6,7 +6,7 @@ const createFavoriteService = async (favorite) => {
 };
 
 // Service to get all favorite games
-const getAllFavoriteService = async () => {
+const getAllFavoritesService = async () => {
     return await favoriteRepository.getAllFavorites();
 };
 
@@ -35,18 +35,9 @@ const addToFavoriteService = async (favoriteData) => {
     return await favoriteRepository.createFavorite(favoriteData);
 };
 
-const getAllFavoritesService = async () => {
-    try {
-        // Lógica para pegar todos os favoritos no banco de dados
-        return await FavoriteModel.find({});
-    } catch (error) {
-        throw new Error('Erro ao buscar favoritos');
-    }
-};
-
 module.exports = {
     createFavoriteService,
-    getAllFavoriteService,
+    getAllFavoritesService,
     getFavoriteByIdService,
     updateFavoriteService,
     deleteFavoriteService,
